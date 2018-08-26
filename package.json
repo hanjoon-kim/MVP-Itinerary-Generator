@@ -19,10 +19,14 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
     "axios": "^0.18.0",
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-native": "~0.55.2",
+    "react-native-multi-toggle-switch": "^1.1.1",
+    "react-native-slider": "^0.11.0",
+    "react-native-vector-icons": "^5.0.0",
     "rn-slider-switch": "0.0.3"
   }
 }

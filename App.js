@@ -1,6 +1,16 @@
-import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React, { Component } from "react";
+import {
+  AppRegistry,
+  ViewPropTypes,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  View,
+  Button
+} from "react-native";
+import PropTypes from "prop-types";
 import MultiSwitch from "rn-slider-switch";
+import Slider from "react-native-slider";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,7 +21,8 @@ export default class App extends React.Component {
       price: "$",
       numberOfPeople: 0,
       startTime: "16",
-      length: 1
+      length: 1,
+      value: 0.2
     };
 
     this.handlePress = this.handlePress.bind(this);
@@ -20,6 +31,7 @@ export default class App extends React.Component {
   handlePress() {
     console.log("pressed skrrt");
   }
+
   render() {
     // Type of Night Selection
     // Ascending
@@ -40,7 +52,15 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>Hanjoon's MVP Guest List</Text>
+        <Text style={styles.header}>Hanjoon's MVP Guest List</Text>
+
+        <View style={styles.choices}>
+          <Slider
+            value={this.state.value}
+            onValueChange={value => this.setState({ value })}
+          />
+          <Text>Value: {this.state.value}</Text>
+        </View>
 
         <MultiSwitch
           currentStatus={"Open"}
@@ -67,8 +87,19 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+  choices: {
+    flex: 0.5,
+    marginLeft: 15,
+    marginRight: 15,
+    alignItems: "stretch"
+    // justifyContent: "center"
+  },
   container: {
-    flex: 1,
+    flex: 0.5,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
