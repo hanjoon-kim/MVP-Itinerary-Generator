@@ -50,6 +50,14 @@ export default class App extends React.Component {
       { label: "7-10", value: 2 },
       { label: "11+", value: 3 }
     ];
+
+    this.places_props = [
+      { label: "2", value: 0 },
+      { label: "3", value: 1 },
+      { label: "4", value: 2 },
+      { label: "5", value: 3 }
+    ];
+
     this.handlePress = this.handlePress.bind(this);
   }
 
@@ -113,6 +121,18 @@ export default class App extends React.Component {
             <Text>How many people are you in your party? {"\n"}</Text>
             <RadioForm
               radio_props={this.people_props}
+              initial={0}
+              formHorizontal={false}
+              labelHorizontal={true}
+              buttonColor={"#2196f3"}
+              animation={true}
+              onPress={value => {
+                this.setState({ value: value });
+              }}
+            />
+            <Text>How many places? {"\n"}</Text>
+            <RadioForm
+              radio_props={this.places_props}
               initial={0}
               formHorizontal={false}
               labelHorizontal={true}
