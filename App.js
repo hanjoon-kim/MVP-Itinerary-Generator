@@ -6,11 +6,15 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  ScrollView
 } from "react-native";
-import PropTypes from "prop-types";
 import MultiSwitch from "rn-slider-switch";
-import Slider from "react-native-slider";
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel
+} from "react-native-simple-radio-button";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -22,9 +26,30 @@ export default class App extends React.Component {
       numberOfPeople: 0,
       startTime: "16",
       length: 1,
-      value: 0.2
+      value: 0.2,
+      radio: 0
     };
 
+    this.price_props = [
+      { label: "$", value: 0 },
+      { label: "$$", value: 1 },
+      { label: "$$$", value: 2 },
+      { label: "$$$$", value: 3 }
+    ];
+
+    this.crazy_props = [
+      { label: "Chill", value: 0 },
+      { label: "Constantly on fire", value: 1 },
+      { label: "Start slow and ascend", value: 2 },
+      { label: "Somewhere in the middle", value: 3 }
+    ];
+
+    this.people_props = [
+      { label: "1-2", value: 0 },
+      { label: "3-6", value: 1 },
+      { label: "7-10", value: 2 },
+      { label: "11+", value: 3 }
+    ];
     this.handlePress = this.handlePress.bind(this);
   }
 
@@ -52,29 +77,53 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Hanjoon's MVP Guest List</Text>
-
-        <View style={styles.choices}>
-          <Slider
-            value={this.state.value}
-            onValueChange={value => this.setState({ value })}
-          />
-          <Text>Value: {this.state.value}</Text>
-        </View>
-
-        <MultiSwitch
-          currentStatus={"Open"}
-          disableScroll={value => {
-            console.log("scrollEnabled", value);
-            // this.scrollView.setNativeProps({
-            //     scrollEnabled: value
-            // });
-          }}
-          isParentScrollEnabled={false}
-          onStatusChanged={text => {
-            console.log("Change Status ", text);
-          }}
-        />
+        <Text style={styles.header}>
+          {"\n"} Hanjoon's MVP Guest List {"\n"}
+        </Text>
+        <ScrollView
+          width="90%"
+          display="flex"
+          contentContainerStyle={{ alignItems: "stretch" }}
+        >
+          <View>
+            <Text>What's your price point? {"\n"}</Text>
+            <RadioForm
+              radio_props={this.price_props}
+              initial={0}
+              formHorizontal={false}
+              labelHorizontal={true}
+              buttonColor={"#2196f3"}
+              animation={true}
+              onPress={value => {
+                this.setState({ value: value });
+              }}
+            />
+            <Text>What kind of night do you want? {"\n"}</Text>
+            <RadioForm
+              radio_props={this.crazy_props}
+              initial={0}
+              formHorizontal={false}
+              labelHorizontal={true}
+              buttonColor={"#2196f3"}
+              animation={true}
+              onPress={value => {
+                this.setState({ value: value });
+              }}
+            />
+            <Text>How many people are you in your party? {"\n"}</Text>
+            <RadioForm
+              radio_props={this.people_props}
+              initial={0}
+              formHorizontal={false}
+              labelHorizontal={true}
+              buttonColor={"#2196f3"}
+              animation={true}
+              onPress={value => {
+                this.setState({ value: value });
+              }}
+            />
+          </View>
+        </ScrollView>
         <Button
           onPress={this.handlePress}
           title="Submit"
@@ -99,7 +148,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center"
   },
   container: {
-    flex: 0.5,
+    flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
