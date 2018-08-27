@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   AppRegistry,
-  ViewPropTypes,
   TouchableOpacity,
   StyleSheet,
   Text,
@@ -9,80 +8,72 @@ import {
   Button,
   ScrollView
 } from "react-native";
-import MultiSwitch from "rn-slider-switch";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel
 } from "react-native-simple-radio-button";
 
+const yelp = require("yelp-fusion");
+const apiKey = window.YELP_API_KEY;
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      type: "",
-      price: "$",
-      numberOfPeople: 0,
-      startTime: "16",
-      length: 1,
-      value: 0.2,
-      radio: 0
+      price: 1,
+      crazy: 1,
+      numberOfPeople: 1,
+      numberOfPlaces: 2,
+      drinks: 0
     };
 
     this.price_props = [
-      { label: "$", value: 0 },
-      { label: "$$", value: 1 },
-      { label: "$$$", value: 2 },
-      { label: "$$$$", value: 3 }
+      { label: "$", value: 1 },
+      { label: "$$", value: 2 },
+      { label: "$$$", value: 3 },
+      { label: "$$$$", value: 4 }
     ];
 
     this.crazy_props = [
-      { label: "Chill", value: 0 },
-      { label: "Constantly on fire", value: 1 },
-      { label: "Start slow and ascend", value: 2 },
-      { label: "Somewhere in the middle", value: 3 }
+      { label: "Chill", value: 1 },
+      { label: "Constantly on fire", value: 2 },
+      { label: "Somewhere in the middle", value: 3 },
+      { label: "Start slow and ascend", value: 4 }
     ];
 
     this.people_props = [
-      { label: "1-2", value: 0 },
-      { label: "3-6", value: 1 },
-      { label: "7-10", value: 2 },
-      { label: "11+", value: 3 }
+      { label: "1-2", value: "small" },
+      { label: "3-6", value: "medium" },
+      { label: "7-10", value: "large" },
+      { label: "11+", value: "extra large" }
     ];
 
     this.places_props = [
-      { label: "2", value: 0 },
-      { label: "3", value: 1 },
-      { label: "4", value: 2 },
-      { label: "5", value: 3 }
+      { label: "2", value: 2 },
+      { label: "3", value: 3 },
+      { label: "4", value: 4 },
+      { label: "5", value: 5 }
+    ];
+
+    this.drinks_props = [
+      { label: "Water", value: 0 },
+      { label: "Beer", value: 1 },
+      { label: "Wine", value: 2 },
+      { label: "Whiskey", value: 3 },
+      { label: "Cocktails", value: 4 },
+      { label: "Other Spirits", value: 5 }
     ];
 
     this.handlePress = this.handlePress.bind(this);
   }
 
   handlePress() {
-    console.log("pressed skrrt");
+    console.log(this.state);
   }
 
   render() {
-    // Type of Night Selection
-    // Ascending
-    // Descending
-    // Constantly on fire
-    // Chill
-    // Somewhere in the middle
-    // Price Point
-    // $
-    // $$
-    // $$$
-    // $$$$
-    // Number of People in Party
-    // Input
-    // Start time
-    // Length of Night
-    // Number of Places
-
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
@@ -103,7 +94,7 @@ export default class App extends React.Component {
               buttonColor={"#2196f3"}
               animation={true}
               onPress={value => {
-                this.setState({ value: value });
+                this.setState({ price: value });
               }}
             />
             <Text>What kind of night do you want? {"\n"}</Text>
@@ -115,7 +106,7 @@ export default class App extends React.Component {
               buttonColor={"#2196f3"}
               animation={true}
               onPress={value => {
-                this.setState({ value: value });
+                this.setState({ crazy: value });
               }}
             />
             <Text>How many people are you in your party? {"\n"}</Text>
@@ -127,7 +118,7 @@ export default class App extends React.Component {
               buttonColor={"#2196f3"}
               animation={true}
               onPress={value => {
-                this.setState({ value: value });
+                this.setState({ numberOfPeople: value });
               }}
             />
             <Text>How many places? {"\n"}</Text>
@@ -139,7 +130,19 @@ export default class App extends React.Component {
               buttonColor={"#2196f3"}
               animation={true}
               onPress={value => {
-                this.setState({ value: value });
+                this.setState({ numberOfPlaces: value });
+              }}
+            />
+            <Text>What kind of drinks do you want? {"\n"}</Text>
+            <RadioForm
+              radio_props={this.drinks_props}
+              initial={0}
+              formHorizontal={false}
+              labelHorizontal={true}
+              buttonColor={"#2196f3"}
+              animation={true}
+              onPress={value => {
+                this.setState({ drinks: value });
               }}
             />
           </View>
@@ -148,7 +151,7 @@ export default class App extends React.Component {
           onPress={this.handlePress}
           title="Submit"
           color="#841584"
-          accessibilityLabel="Learn more about this purple button"
+          accessibilityLabel="Submit"
         />
       </View>
     );
