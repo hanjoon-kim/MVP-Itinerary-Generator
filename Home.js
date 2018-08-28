@@ -6,21 +6,12 @@ import RadioForm, {
   RadioButtonLabel
 } from "react-native-simple-radio-button";
 
-class NumberOfPlaces extends React.Component {
+class Home extends React.Component {
   static navigationOptions = {
-    title: "4 of 5"
+    title: "MVP Guest List"
   };
   constructor(props) {
     super(props);
-
-    this.places = 2;
-
-    this.places_props = [
-      { label: "2", value: 2 },
-      { label: "3", value: 3 },
-      { label: "4", value: 4 },
-      { label: "5", value: 5 }
-    ];
 
     this.handlePress = this.handlePress.bind(this);
   }
@@ -28,29 +19,17 @@ class NumberOfPlaces extends React.Component {
   handlePress() {
     const { navigate } = this.props.navigation;
 
-    navigate("Drinks", { places: this.places });
+    navigate("PricePoint");
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>How many places? {"\n"}</Text>
-        <RadioForm
-          radio_props={this.places_props}
-          initial={0}
-          formHorizontal={true}
-          labelHorizontal={false}
-          buttonColor={"#00BF6F"}
-          selectedButtonColor={"#00BF6F"}
-          animation={true}
-          onPress={value => {
-            this.places = value;
-          }}
-        />
+        <Text style={styles.text}>Ready for a fun night? {"\n"}</Text>
         <Text>{"\n"}</Text>
         <Button
           onPress={this.handlePress}
-          title="Next"
+          title="Let's Start!"
           color="#00BF6F"
           accessibilityLabel="Submit"
         />
@@ -74,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default NumberOfPlaces;
+export default Home;

@@ -7,17 +7,17 @@ import RadioForm, {
 } from "react-native-simple-radio-button";
 
 class Ambiance extends React.Component {
-  // static navigationOptions = {
-  //   title: "Welcome"
-  // };
+  static navigationOptions = {
+    title: "2 of 5"
+  };
   constructor(props) {
     super(props);
 
     this.ambiance = 1;
 
     this.ambiance_props = [
-      { label: "   Chill    ", value: 1 },
-      { label: "  On Fire  ", value: 2 },
+      { label: "    Chill     ", value: 1 },
+      { label: "   On Fire   ", value: 2 },
       { label: "In Between", value: 3 }
     ];
 
@@ -42,11 +42,13 @@ class Ambiance extends React.Component {
           formHorizontal={true}
           labelHorizontal={false}
           buttonColor={"#00BF6F"}
+          selectedButtonColor={"#00BF6F"}
           animation={true}
           onPress={value => {
             this.ambiance = value;
           }}
         />
+        <Text>{"\n"}</Text>
         <Button
           onPress={this.handlePress}
           title="Next"
@@ -60,8 +62,10 @@ class Ambiance extends React.Component {
 
 const styles = StyleSheet.create({
   text: {
+    width: "95%",
     fontSize: 30,
-    color: "#00BF6F"
+    color: "#00BF6F",
+    textAlign: "center"
   },
   container: {
     flex: 1,

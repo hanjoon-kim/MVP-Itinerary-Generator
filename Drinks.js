@@ -9,21 +9,22 @@ import axios from "axios";
 import "./yelpAPI.js";
 
 const apiKey = global.YELP_API_KEY;
-const config = {
+let config = {
   headers: {
     Authorization: `Bearer ${apiKey}`
   },
   params: {
     term: "bars",
     location: "944 market st, san francisco, ca",
-    limit: 5
+    limit: 5,
+    price: "4"
   }
 };
 
 class Drinks extends React.Component {
-  // static navigationOptions = {
-  //   title: "Welcome"
-  // };
+  static navigationOptions = {
+    title: "5 of 5"
+  };
   constructor(props) {
     super(props);
 
@@ -43,10 +44,16 @@ class Drinks extends React.Component {
 
   handlePress() {
     const { navigate } = this.props.navigation;
+    config.params.limit = this.props.navigation.state.params.places;
+    config.params.price = this.props.navigation.state.params.price;
     axios
       .get("https://api.yelp.com/v3/businesses/search", config)
-      .then(response => console.log(response));
-    navigate("Results", { drinks: this.drinks });
+      .then(response =>
+        navigate("Results", {
+          bars: response.data.businesses,
+          drinks: this.drinks
+        })
+      );
   }
 
   render() {
@@ -59,15 +66,18 @@ class Drinks extends React.Component {
           formHorizontal={true}
           labelHorizontal={false}
           buttonColor={"#00BF6F"}
+          selectedButtonColor={"#00BF6F"}
           animation={true}
           onPress={value => {
             this.drinks = value;
           }}
         />
+        <Text>{"\n"}</Text>
         <Button
           onPress={this.handlePress}
           title="Submit"
           color="#00BF6F"
+          selectedButtonColor={"#00BF6F"}
           accessibilityLabel="Submit"
         />
       </View>
@@ -77,8 +87,10 @@ class Drinks extends React.Component {
 
 const styles = StyleSheet.create({
   text: {
+    width: "95%",
     fontSize: 30,
-    color: "#00BF6F"
+    color: "#00BF6F",
+    textAlign: "center"
   },
   container: {
     flex: 1,

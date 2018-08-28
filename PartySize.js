@@ -7,9 +7,9 @@ import RadioForm, {
 } from "react-native-simple-radio-button";
 
 class PartySize extends React.Component {
-  // static navigationOptions = {
-  //   title: "Welcome"
-  // };
+  static navigationOptions = {
+    title: "3 of 5"
+  };
   constructor(props) {
     super(props);
 
@@ -43,11 +43,13 @@ class PartySize extends React.Component {
           formHorizontal={true}
           labelHorizontal={false}
           buttonColor={"#00BF6F"}
+          selectedButtonColor={"#00BF6F"}
           animation={true}
           onPress={value => {
             this.people = value;
           }}
         />
+        <Text>{"\n"}</Text>
         <Button
           onPress={this.handlePress}
           title="Next"
@@ -61,8 +63,10 @@ class PartySize extends React.Component {
 
 const styles = StyleSheet.create({
   text: {
+    width: "95%",
     fontSize: 30,
-    color: "#00BF6F"
+    color: "#00BF6F",
+    textAlign: "center"
   },
   container: {
     flex: 1,

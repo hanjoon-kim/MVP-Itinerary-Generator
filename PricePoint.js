@@ -7,19 +7,20 @@ import RadioForm, {
 } from "react-native-simple-radio-button";
 
 class PricePoint extends React.Component {
-  // static navigationOptions = {
-  //   title: "Welcome"
-  // };
+  static navigationOptions = {
+    title: "1 of 5"
+  };
+
   constructor(props) {
     super(props);
 
-    this.price = 1;
+    this.price = "1";
 
     this.price_props = [
-      { label: "$", value: 1 },
-      { label: "$$", value: 2 },
-      { label: "$$$", value: 3 },
-      { label: "$$$$", value: 4 }
+      { label: "$", value: "1" },
+      { label: "$$", value: "2" },
+      { label: "$$$", value: "3" },
+      { label: "$$$$", value: "4" }
     ];
 
     this.handlePress = this.handlePress.bind(this);
@@ -43,11 +44,13 @@ class PricePoint extends React.Component {
           formHorizontal={true}
           labelHorizontal={false}
           buttonColor={"#00BF6F"}
+          selectedButtonColor={"#00BF6F"}
           animation={true}
           onPress={value => {
             this.price = value;
           }}
         />
+        <Text>{"\n"}</Text>
         <Button
           onPress={this.handlePress}
           title="Next"
@@ -62,9 +65,9 @@ class PricePoint extends React.Component {
 const styles = StyleSheet.create({
   text: {
     width: "95%",
-
     fontSize: 30,
-    color: "#00BF6F"
+    color: "#00BF6F",
+    textAlign: "center"
   },
   container: {
     flex: 1,
