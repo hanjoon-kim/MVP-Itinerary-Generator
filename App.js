@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component } from "react";
 import {
   AppRegistry,
@@ -13,9 +15,19 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from "react-native-simple-radio-button";
+import axios from "axios";
+import "./yelpAPI.js";
 
-const yelp = require("yelp-fusion");
-const apiKey = window.YELP_API_KEY;
+const apiKey = global.YELP_API_KEY;
+const config = {
+  headers: {
+    Authorization: `Bearer ${apiKey}`
+  },
+  params: {
+    term: "tacos",
+    location: "main 123st"
+  }
+};
 
 export default class App extends React.Component {
   constructor(props) {
@@ -66,11 +78,19 @@ export default class App extends React.Component {
       { label: "Other Spirits", value: 5 }
     ];
 
+    this.searchRequest = {
+      term: "bar",
+      location: "san francsisco, ca"
+    };
+
     this.handlePress = this.handlePress.bind(this);
   }
 
   handlePress() {
-    console.log(this.state);
+    console.log(apiKey);
+    axios
+      .get("https://api.yelp.com/v3/businesses/search", config)
+      .then(response => console.log(response));
   }
 
   render() {

@@ -28,6 +28,8 @@
     "react-native-simple-radio-button": "^2.7.2",
     "react-native-slider": "^0.11.0",
     "react-native-vector-icons": "^5.0.0",
-    "rn-slider-switch": "0.0.3"
+    "rn-slider-switch": "0.0.3",
+    "v3-yelp-api": "^1.0.2",
+    "yelp-fusion": "^2.0.3"
   }
 }
